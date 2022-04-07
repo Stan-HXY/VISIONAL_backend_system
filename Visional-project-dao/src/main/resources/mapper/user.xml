@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD MAPPER 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.Visional.project.dao.UserDAO">
+    <select id="getUserByPhone" parameterType="java.lang.String" resultType="com.Visional.project.domain.User">
+        select *
+        from t_user
+        where Phone = #{Phone}
+    </select>
+
+    <insert id="addUser" parameterType="com.Visional.project.domain.User" useGeneratedKeys="true" keyProperty="id">
+        insert into t_user(
+            Phone, Email, Password, Salt, CreateTime)
+        values (
+            #{Phone}, #{Email}, #{Password}, #{Salt}, #{CreateTime})
+    </insert>
+
+    <insert id="addUserInfo" parameterType="com.Visional.project.domain.UserInfo">
+        insert into t_user_info(
+            UserID, Nickname, Avatar, Sign, Gender, Birthday, CreateTime)
+        values (
+            #{UserID}, #{Nickname}, #{Avatar}, #{Sign}, #{Gender}, #{Birthday}, #{CreateTime})
+    </insert>
+    
+    <select id="getUserByID" parameterType="java.lang.Long" resultType="com.Visional.project.domain.User">
+        select *
+        from t_user
+        where id = #{id}
+    </select>
+    
+    <select id="getUserInfoByUserID" parameterType="java.lang.Long" resultType="com.Visional.project.domain.UserInfo">
+        select *
+        from t_user_info
+        where UserID = #{UserID}
+    </select>
+</mapper>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
