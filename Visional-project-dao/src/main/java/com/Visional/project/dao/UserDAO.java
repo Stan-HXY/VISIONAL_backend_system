@@ -3,6 +3,7 @@ package com.Visional.project.dao;
 import com.Visional.project.domain.User;
 import com.Visional.project.domain.UserInfo;
 import org.apache.ibatis.annotations.Mapper;
+import org.apache.ibatis.annotations.Param;
 
 // Used for interaction with Database
 @Mapper // Mybatis: mapping object into XML
@@ -20,4 +21,10 @@ public interface UserDAO {
     User getUserByID(Long id);
 
     UserInfo getUserInfoByUserID(Long UserID);
+
+    Integer updateUsers(User user);
+
+    User getUserByPhoneOrEmail(@Param("Phone") String Phone, @Param("Email") String Email);
+
+    Integer updateUserInfos(UserInfo userinfo);
 }

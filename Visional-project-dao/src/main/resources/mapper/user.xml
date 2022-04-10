@@ -32,6 +32,57 @@
         from t_user_info
         where UserID = #{UserID}
     </select>
+
+    <update id="updateUsers" parameterType="com.imooc.bilibili.domain.User">
+        update
+        t_user
+        set
+            <if test="Phone != null and Phone != '' ">
+                Phone = #{Phone},
+            </if>
+            <if test="Email != null and Email != '' ">
+                Email = #{Email},
+            </if>
+            <if test="Password != null and Password != '' ">
+                Password = #{Password},
+            </if>
+            UpdateTime = #{UpdateTime}
+        where
+            id = #{id}
+    </update>
+
+    <select id="getUserByPhoneOrEmail" parameterType="java.lang.String" resultType="com.imooc.bilibili.domain.User">
+        select
+            *
+        from
+            t_user
+        where
+            Phone = #{Phone} or Email = #{Email}
+    </select>
+    
+    <update id="updateUserInfos" parameterType="com.Visional.project.domain.UserInfo">
+        update
+        t_user_info
+        set
+        <if test="Nickname != null and Nickname != '' ">
+            Nickname = #{Nickname},
+        </if>
+        <if test="Avatar != null">
+            Avatar = #{Avatar},
+        </if>
+        <if test="Sign != null">
+            Sign = #{Sign},
+        </if>
+        <if test="Birthday != null and Birthday != '' ">
+            Birthday = #{Birthday},
+        </if>
+        <if test="Gender != null and Gender != '' ">
+            Gender = #{Gender},
+        </if>
+        UpdateTime = #{UpdateTime}
+        where
+            UserID = #{UserID}
+    </update>
 </mapper>
 
 

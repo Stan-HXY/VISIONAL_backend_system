@@ -3,6 +3,7 @@ package com.Visional.project.api;
 import com.Visional.project.api.support.UserSupport;
 import com.Visional.project.domain.JsonResponse;
 import com.Visional.project.domain.User;
+import com.Visional.project.domain.UserInfo;
 import com.Visional.project.service.UserService;
 import com.Visional.project.service.util.RSAUtil;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -47,6 +48,22 @@ public class UserAPI {
         // user token - 用户凭证
         String token = userService.login(user);
         return new JsonResponse<>(token); // sent to frontend
+    }
+
+    @PutMapping("/users")
+    public JsonResponse<String> updateUsers(@RequestBody User user) throws Exception{
+        Long userId = userSupport.getCurrentUserID();
+        user.setId(userId);
+        userService.updateUsers(user);
+        return JsonResponse.success();
+    }
+
+    @PutMapping("/user-infos")
+    public JsonResponse<String> updateUserInfos(@RequestBody UserInfo userinfo){
+        Long userID = userSupport.getCurrentUserID();
+        userinfo.setUserID(userID);
+        userService.UpdateUserInfos(userinfo);
+        return JsonResponse.success();
     }
 
 
