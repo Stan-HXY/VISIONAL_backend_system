@@ -33,25 +33,9 @@
         where UserID = #{UserID}
     </select>
 
-    <update id="updateUsers" parameterType="com.imooc.bilibili.domain.User">
-        update
-        t_user
-        set
-            <if test="Phone != null and Phone != '' ">
-                Phone = #{Phone},
-            </if>
-            <if test="Email != null and Email != '' ">
-                Email = #{Email},
-            </if>
-            <if test="Password != null and Password != '' ">
-                Password = #{Password},
-            </if>
-            UpdateTime = #{UpdateTime}
-        where
-            id = #{id}
-    </update>
 
-    <select id="getUserByPhoneOrEmail" parameterType="java.lang.String" resultType="com.imooc.bilibili.domain.User">
+
+    <select id="getUserByPhoneOrEmail" parameterType="java.lang.String" resultType="com.Visional.project.domain.UserInfo">
         select
             *
         from
@@ -59,6 +43,24 @@
         where
             Phone = #{Phone} or Email = #{Email}
     </select>
+
+    <update id="updateUsers" parameterType="com.Visional.project.domain.UserInfo">
+        update
+        t_user
+        set
+        <if test="Phone != null and Phone != '' ">
+            Phone = #{Phone},
+        </if>
+        <if test="Email != null and Email != '' ">
+            Email = #{Email},
+        </if>
+        <if test="Password != null and Password != '' ">
+            Password = #{Password},
+        </if>
+        UpdateTime = #{UpdateTime}
+        where
+        id = #{id}
+    </update>
     
     <update id="updateUserInfos" parameterType="com.Visional.project.domain.UserInfo">
         update
