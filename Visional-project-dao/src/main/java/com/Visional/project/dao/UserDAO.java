@@ -5,9 +5,13 @@ import com.Visional.project.domain.UserInfo;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
 
+import java.util.List;
+import java.util.Set;
+
 // Used for interaction with Database
 @Mapper // Mybatis: mapping object into XML
 public interface UserDAO {
+
 
     // Function body is SQL Query, in XML file
     User getUserByPhone(String Phone);
@@ -27,4 +31,6 @@ public interface UserDAO {
     User getUserByPhoneOrEmail(@Param("Phone") String Phone, @Param("Email") String Email);
 
     Integer updateUserInfos(UserInfo userinfo);
+
+    List<UserInfo> getUserInfoByUserIDs(Set<Long> UserIDList);
 }

@@ -85,6 +85,20 @@
         where
             UserID = #{UserID}
     </update>
+
+    <select id="getUserInfoByUserIDs" resultType="com.Visional.project.domain.UserInfo">
+        select *
+        from t_user_info
+        where
+            1 = 1
+            <if test="UserIDList != null and UserIDList.size > 0">
+                and UserID in 
+                <foreach collection="UserIDList" item="UserID" index="index" open="(" close=")" separator=",">
+                    #{UserID}
+                </foreach>
+            </if>
+    </select>
+
 </mapper>
 
 
